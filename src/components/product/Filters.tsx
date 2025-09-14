@@ -2,7 +2,7 @@
 
 import { FilterOptions } from "@/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FaFilter, FaTimes } from "react-icons/fa";
 
 interface FiltersProps {

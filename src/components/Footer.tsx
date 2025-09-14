@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="footer-section">
         <h4 className="footer-heading online-shopping-heading">ONLINE SHOPPING</h4>
         <ul className="footer-links">
-          <li><a href="/products/men">Men's Fashion</a></li>
-          <li><a href="/products/women">Women's Fashion</a></li>
-          <li><a href="/products/kids">Kids' Fashion</a></li>
+          <li><a href="/products/men">Men&apos;s Fashion</a></li>
+          <li><a href="/products/women">Women&apos;s Fashion</a></li>
+          <li><a href="/products/kids">Kids&apos; Fashion</a></li>
           <li><a href="/products/accessories">Accessories</a></li>
         </ul>
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import Image from "next/image";
 
 const Footer = () => {
   return (
@@ -107,10 +108,22 @@ const Footer = () => {
             <h4 className="footer-heading mb-4">Experience App on Mobile</h4>
             <div className="flex space-x-4 mb-6">
               <Link href="#" className="text-gray-600 hover:text-pink-500">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1000px-Google_Play_Store_badge_EN.svg.png" alt="Google Play" className="h-10" />
+                <Image 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Google_Play_Store_badge_EN.svg/1000px-Google_Play_Store_badge_EN.svg.png" 
+                  alt="Google Play" 
+                  width={120} 
+                  height={40} 
+                  className="h-10 w-auto" 
+                />
               </Link>
               <Link href="#" className="text-gray-600 hover:text-pink-500">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1000px-Download_on_the_App_Store_Badge.svg.png" alt="App Store" className="h-10" />
+                <Image 
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Download_on_the_App_Store_Badge.svg/1000px-Download_on_the_App_Store_Badge.svg.png" 
+                  alt="App Store" 
+                  width={120} 
+                  height={40} 
+                  className="h-10 w-auto" 
+                />
               </Link>
             </div>
             

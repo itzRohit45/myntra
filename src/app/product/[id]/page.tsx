@@ -5,7 +5,7 @@ import ProductCard from "@/components/product/ProductCard";
 import { useCart } from "@/lib/cart-context";
 import { Product } from "@/types";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { FaMinus, FaPlus, FaShoppingBag, FaStar } from "react-icons/fa";
 
 export default function ProductDetailPage() {
@@ -21,6 +21,19 @@ export default function ProductDetailPage() {
   const [quantity, setQuantity] = useState(1);
   const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
   const [error, setError] = useState<string | null>(null);
+
+  const fetchSimilarProducts = useCallback(async (category: string) => {
+    try {
+      const response = await fetch(`/api/products?category=${category}&limit=4`);
+      const data = await response.json();
+      // Filter out the current product from similar products
+      setSimilarProducts(
+        data.products.filter((p: Product) => p.id !== productId).slice(0, 4)
+      );
+    } catch (error) {
+      console.error("Error fetching similar products:", error);
+    }
+  }, [productId]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -51,20 +64,7 @@ export default function ProductDetailPage() {
     if (productId) {
       fetchProduct();
     }
-  }, [productId]);
-
-  const fetchSimilarProducts = async (category: string) => {
-    try {
-      const response = await fetch(`/api/products?category=${category}&limit=4`);
-      const data = await response.json();
-      // Filter out the current product from similar products
-      setSimilarProducts(
-        data.products.filter((p: Product) => p.id !== productId).slice(0, 4)
-      );
-    } catch (error) {
-      console.error("Error fetching similar products:", error);
-    }
-  };
+  }, [productId, fetchSimilarProducts]);
 
   const handleAddToCart = () => {
     if (!product) return;
@@ -102,7 +102,7 @@ export default function ProductDetailPage() {
       <div className="container mx-auto px-4 py-12">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">Product Not Found</h1>
-          <p className="text-gray-600 mb-6">The product you're looking for doesn't exist or has been removed.</p>
+          <p className="text-gray-600 mb-6">The product you&apos;re looking for doesn&apos;t exist or has been removed.</p>
           <button 
             onClick={() => router.push("/products")}
             className="px-6 py-2 bg-pink-500 text-white rounded-md hover:bg-pink-600 transition-colors"
@@ -113,8 +113,6 @@ export default function ProductDetailPage() {
       </div>
     );
   }
-
-  const discountPercentage = product.discount ? parseInt(product.discount) : 0;
 
   return (
     <div className="container mx-auto px-4 py-8">
