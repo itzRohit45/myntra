@@ -1,0 +1,21 @@
+/* Footer heading styles */
+.footer-heading,
+.footer h4,
+.footer-title,
+.footer-section-title {
+  font-weight: 700 !important; /* Make text bolder */
+  color: #282c3f !important; /* Darker color for better contrast */
+  font-size: 14px !important; /* Slightly larger font size */
+  margin-bottom: 15px !important; /* Add spacing below headings */
+  opacity: 1 !important; /* Ensure full opacity */
+  letter-spacing: 0.5px; /* Improve legibility */
+}
+
+/* If you have specific class names for the footer headings, add them here */
+.online-shopping-heading,
+.customer-policies-heading,
+.useful-links-heading,
+.experience-app-heading {
+  font-weight: 700 !important;
+  color: #282c3f !important;
+}
