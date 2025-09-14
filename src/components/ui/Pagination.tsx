@@ -1,13 +1,14 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 interface PaginationProps {
   currentPage: number;
   totalPages: number;
 }
 
-const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
+const PaginationContent = ({ currentPage, totalPages }: PaginationProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -140,6 +141,15 @@ const Pagination = ({ currentPage, totalPages }: PaginationProps) => {
         Next
       </button>
     </div>
+  );
+};
+
+// Wrapper component with Suspense
+const Pagination = (props: PaginationProps) => {
+  return (
+    <Suspense fallback={<div>Loading pagination...</div>}>
+      <PaginationContent {...props} />
+    </Suspense>
   );
 };
 

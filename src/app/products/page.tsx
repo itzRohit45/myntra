@@ -4,11 +4,12 @@ import Filters from "@/components/product/Filters";
 import ProductCard from "@/components/product/ProductCard";
 import Pagination from "@/components/ui/Pagination";
 import { FilterOptions, Product } from "@/types";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { FaFilter, FaTimes } from "react-icons/fa";
 import { useSearchParams } from "next/navigation";
 
-export default function ProductsPage() {
+// Create a component that uses searchParams
+function ProductsContent() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
@@ -163,5 +164,14 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+// Wrap with Suspense in the main component
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={<div className="container mx-auto px-4 py-8 flex justify-center items-center h-screen">Loading...</div>}>
+      <ProductsContent />
+    </Suspense>
   );
 }

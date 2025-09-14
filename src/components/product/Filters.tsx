@@ -2,14 +2,15 @@
 
 import { FilterOptions } from "@/types";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { FaFilter, FaTimes } from "react-icons/fa";
 
 interface FiltersProps {
   filterOptions: FilterOptions;
 }
 
-const Filters = ({ filterOptions }: FiltersProps) => {
+// Component using useSearchParams
+const FiltersContent = ({ filterOptions }: FiltersProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -274,6 +275,15 @@ const Filters = ({ filterOptions }: FiltersProps) => {
         </div>
       </div>
     </div>
+  );
+};
+
+// Wrapper component with Suspense
+const Filters = (props: FiltersProps) => {
+  return (
+    <Suspense fallback={<div>Loading filters...</div>}>
+      <FiltersContent {...props} />
+    </Suspense>
   );
 };
 
